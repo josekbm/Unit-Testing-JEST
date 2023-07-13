@@ -4,6 +4,8 @@ class Room {
       this.bookings = bookings;
       this.rate = rate;
       this.discount = discount;
+      if (discount > 100)
+        throw new Error ("Discount must be less than 100%");
     }
   
     isOccupied(date) {
@@ -31,7 +33,7 @@ class Room {
       let occupied = [];
   
       if (startDate.getTime() > endDate.getTime()) {
-        return "Start can not be greater than end date";
+        return "La fecha de inicio no puede ser mayor que la fecha de fin.";
       }
   
       do {
@@ -78,19 +80,32 @@ class Room {
     constructor(name, email, checkIn, checkOut, discount, room) {
       this.name = name;
       this.email = email;
+      if (!(checkIn instanceof Date))
+            throw new Error("checkIn should be instaceof Date");
+      if (!(checkOut instanceof Date))
+            throw new Error("checkOut should be instaceof Date");
       this.checkIn = checkIn;
       this.checkOut = checkOut;
       this.discount = discount;
+      if (discount > 100)
+        throw new Error ("Discount must be less than 100%");
       this.room = room;
+
+      
+
     }
   
     getFee() {
-      const total =
-        this.discount + this.room.discount >= 90
-          ? 90
-          : this.discount + this.room.discount;
-      return Math.floor(this.room.rate * (total / 100));
-    }
+      let priceRoom = this.room.rate;
+        let durationInDays = (this.checkOut - this.checkIn) / (1000 * 60 * 60 * 24);
+        let discountRoom = priceRoom - (priceRoom * this.room.discount / 100);
+        let fee = discountRoom * durationInDays;
+        let discountBooking = fee - (fee * this.discount / 100); // Aplicar el descuento en la reserva
+
+        return discountBooking;
+      
+      
+  }
   }
   
   module.exports = { Room, Booking };

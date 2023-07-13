@@ -1,5 +1,69 @@
 const { Room, Booking } = require("./index");
 
+describe("Booking.checkIn es Date", () => {
+  test("Es Date", () => {
+      expect(new Booking(
+        "Suite",
+        "email@inmail.com",
+        new Date(),
+        new Date(),
+        0,
+        new Room("Suite", [], 1, 0)).checkIn instanceof Date).toBeTruthy();
+  });
+
+  test("Es String", () => {
+      expect(() => new Booking(
+        "Suite", 
+        "email@inmail.com", 
+        "12/12/12", 
+        new Date(), 
+        0, 
+        new Room("Suite", [], 1, 0))).toThrow();
+  });
+
+  test("Es null", () => {
+      expect(() => new Booking(
+        "Suite", 
+        "email@inmail.com", 
+        null, 
+        new Date(), 
+        0, 
+        new Room("Suite", [], 1, 0))).toThrow();
+  });
+});
+
+describe("Booking.checkOut es Date", () => {
+  test("Es Date", () => {
+      expect(new Booking(
+        "Suite", 
+        "email@inmail.com", 
+        new Date(), 
+        new Date(), 
+        0, 
+        new Room("Suite", [], 1, 0)).checkOut instanceof Date).toBeTruthy();
+  });
+
+  test("Es String", () => {
+      expect(() => new Booking(
+        "Suite", 
+        "email@inmail.com",
+        new Date(), 
+        "12/12/12", 
+        0, 
+        new Room("Suite", [], 1, 0))).toThrow();
+  });
+
+  test("Es null", () => {
+      expect(() => new Booking(
+        "Suite", 
+        "email@inmail.com", 
+        new Date(), 
+        null, 
+        0, 
+        new Room("Suite", [], 1, 0))).toThrow();
+  });
+});
+
 describe("Ocupación en una fecha determinada", () => {
   test("devolverá true (habitación ocupada)", () => {
     const booking1 = new Booking(
@@ -27,9 +91,9 @@ describe("Ocupación en una fecha determinada", () => {
       {}
     );
 
-    const room1 = new Room("Special", [booking1, booking2, booking3], 1000, 10);
+    const room1 = new Room("Double Superior", [booking1, booking2, booking3], 1000, 10);
 
-    expect(room1.isOccupied(new Date("04/17/2023"))).toBe(true);
+    expect(room1.isOccupied(new Date("04/21/2023"))).toBe(true);
   });
 
   test("devolverá false (habitación disponible)", () => {
@@ -58,7 +122,7 @@ describe("Ocupación en una fecha determinada", () => {
       {}
     );
 
-    const room1 = new Room("Special", [booking1, booking2, booking3], 1000, 10);
+    const room1 = new Room("Double Superior", [booking1, booking2, booking3], 1000, 10);
 
     expect(room1.isOccupied(new Date("04/23/2023"))).toBe(false);
   });
@@ -91,7 +155,7 @@ describe("Porcentaje de días con ocupación", () => {
       {}
     );
 
-    const room1 = new Room("Special", [booking1, booking2, booking3], 1000, 10);
+    const room1 = new Room("Double Superior", [booking1, booking2, booking3], 1000, 10);
 
     expect(
       room1.occupancyPercentage(new Date("04/23/2023"), new Date("04/24/2023"))
@@ -124,7 +188,7 @@ describe("Porcentaje de días con ocupación", () => {
       {}
     );
 
-    const room1 = new Room("Special", [booking1, booking2, booking3], 1000, 10);
+    const room1 = new Room("Double Superior", [booking1, booking2, booking3], 1000, 10);
 
     expect(
       room1.occupancyPercentage(new Date("04/16/2023"), new Date("04/22/2023"))
@@ -157,7 +221,7 @@ describe("Porcentaje de días con ocupación", () => {
       {}
     );
 
-    const room1 = new Room("Special", [booking1, booking2, booking3], 1000, 10);
+    const room1 = new Room("Double Superior", [booking1, booking2, booking3], 1000, 10);
 
     expect(
       room1.occupancyPercentage(new Date("04/16/2023"), new Date("04/29/2023"))
@@ -184,8 +248,8 @@ describe("Array con habitaciones no ocupadas", () => {
       {}
     );
 
-    const room1 = new Room("Special", [booking1], 1000, 10);
-    const room2 = new Room("Special", [booking2], 1000, 10);
+    const room1 = new Room("Double Superior", [booking1], 1000, 10);
+    const room2 = new Room("Double Superior", [booking2], 1000, 10);
 
     const rooms = [room1, room2];
 
@@ -212,8 +276,8 @@ describe("Array con habitaciones no ocupadas", () => {
       {}
     );
 
-    const room1 = new Room("Special", [booking1], 1000, 10);
-    const room2 = new Room("Special", [booking2], 1000, 10);
+    const room1 = new Room("Double Superior", [booking1], 1000, 10);
+    const room2 = new Room("Double Superior", [booking2], 1000, 10);
 
     const rooms = [room1, room2];
 
@@ -240,8 +304,8 @@ describe("Array con habitaciones no ocupadas", () => {
       {}
     );
 
-    const room1 = new Room("Special", [booking1], 1000, 10);
-    const room2 = new Room("Special", [booking2], 1000, 10);
+    const room1 = new Room("Double Superior", [booking1], 1000, 10);
+    const room2 = new Room("Double Superior", [booking2], 1000, 10);
 
     const rooms = [room1, room2];
 
@@ -270,8 +334,8 @@ describe("Porcentaje de ocupación en todas las habitaciones", () => {
       {}
     );
 
-    const room1 = new Room("Special", [booking1], 1000, 10);
-    const room2 = new Room("Special", [booking2], 1000, 10);
+    const room1 = new Room("Double Superior", [booking1], 1000, 10);
+    const room2 = new Room("Double Superior", [booking2], 1000, 10);
 
     const rooms = [room1, room2];
 
@@ -302,8 +366,8 @@ describe("Porcentaje de ocupación en todas las habitaciones", () => {
       {}
     );
 
-    const room1 = new Room("Special", [booking1], 1000, 10);
-    const room2 = new Room("Special", [booking2], 1000, 10);
+    const room1 = new Room("Double Superior", [booking1], 1000, 10);
+    const room2 = new Room("Double Superior", [booking2], 1000, 10);
 
     const rooms = [room1, room2];
 
@@ -334,8 +398,8 @@ describe("Porcentaje de ocupación en todas las habitaciones", () => {
       {}
     );
 
-    const room1 = new Room("Special", [booking1], 1000, 10);
-    const room2 = new Room("Special", [booking2], 1000, 10);
+    const room1 = new Room("Double Superior", [booking1], 1000, 10);
+    const room2 = new Room("Double Superior", [booking2], 1000, 10);
 
     const rooms = [room1, room2];
 
@@ -366,8 +430,8 @@ describe("Porcentaje de ocupación en todas las habitaciones", () => {
       {}
     );
 
-    const room1 = new Room("Special", [booking1], 1000, 10);
-    const room2 = new Room("Special", [booking2], 1000, 10);
+    const room1 = new Room("Double Superior", [booking1], 1000, 10);
+    const room2 = new Room("Double Superior", [booking2], 1000, 10);
 
     const rooms = [room1, room2];
 
@@ -381,72 +445,89 @@ describe("Porcentaje de ocupación en todas las habitaciones", () => {
   });
 });
 
-describe("Precio total", () => {
-  test("devería devolver 400", () => {
-    const room1 = new Room("Special", [], 1000, 10);
-
-    const booking1 = new Booking(
-      "Booking1",
-      "example1@exaple",
-      new Date("04/16/2023"),
-      new Date("04/18/2023"),
-      30,
-      room1
+describe("Comprobar la tarifa total de un booking", () => {
+  test("Devolverá la tarifa valor por noche con un 20% y 20% de booking", () => {
+    const room = new Room("single bed", [], 100, 20);
+    const booking = new Booking(
+      "Kevin",
+      "kevinFrost@inmail.com",
+      new Date('2023-06-01'),
+      new Date('2023-06-06'),
+      20,
+      room
     );
+    room.bookings = booking;
 
-    room1.bookings.push(booking1);
-
-    expect(booking1.getFee()).toEqual(400);
+    expect(booking.getFee()).toBe(320);
   });
-
-  test("devería devolver 1000", () => {
-    const room1 = new Room("Special", [], 1000, 0);
-
-    const booking1 = new Booking(
-      "Booking1",
-      "example1@exaple",
-      new Date("04/16/2023"),
-      new Date("04/18/2023"),
+  test("Devolverá la tarifa valor por noche cuando ambos descuentos sean 0%", () => {
+    const room = new Room("single bed", [], 100, 0);
+    const booking = new Booking(
+      "Kevin",
+      "kevinFrost@inmail.com",
+      new Date('2023-06-01'),
+      new Date('2023-06-06'),
       0,
-      room1
+      room
     );
+    room.bookings = booking;
 
-    room1.bookings.push(booking1);
+    expect(booking.getFee()).toBe(500);
+  });
+  test("Devolverá la tarifa valor por noche con un 25% y 10% de booking", () => {
+    const room = new Room("single bed", [], 100, 25);
+    const booking = new Booking(
+      "Kevin",
+      "kevinFrost@inmail.com",
+      new Date('2023-06-01'),
+      new Date('2023-06-05'),
+      10,
+      room
+    );
+    room.bookings = booking;
 
-    expect(booking1.getFee()).toEqual(0);
+    expect(booking.getFee()).toBe(270);
+  });
+  test("Devolverá la tarifa valor por noche con un 50% y 10% de booking", () => {
+    const room = new Room("single bed", [], 300, 50);
+    const booking = new Booking(
+      "Kevin",
+      "kevinFrost@inmail.com",
+      new Date('2023-06-01'),
+      new Date('2023-06-05'),
+      10,
+      room
+    );
+    room.bookings = booking;
+
+    expect(booking.getFee()).toBe(540);
+  });
+  test("Devolverá la tarifa valor por noche con un 30% y 0% de booking", () => {
+    const room = new Room("single bed", [], 300, 30);
+    const booking = new Booking(
+      "Kevin",
+      "kevinFrost@inmail.com",
+      new Date('2023-06-01'),
+      new Date('2023-06-05'),
+      0,
+      room
+    );
+    room.bookings = booking;
+
+    expect(booking.getFee()).toBe(840);
   });
 
-  test("devería devolver 900", () => {
-    const room1 = new Room("Special", [], 1000, 40);
-
-    const booking1 = new Booking(
-      "Booking1",
-      "example1@exaple",
-      new Date("04/16/2023"),
-      new Date("04/18/2023"),
-      50,
-      room1
-    );
-
-    room1.bookings.push(booking1);
-
-    expect(booking1.getFee()).toEqual(900);
+  test("Devolverá error cuando los descuentos sean superiores al 100%", () => {
+    expect(() => {
+      new Booking(
+        "Suite",
+        "kevinFrost@inmail.com",
+        new Date('2023-06-01'),
+        new Date('2023-06-05'),
+        110,
+        new Room("single bed", [], 300, 100)
+      ).getFee();
+    }).toThrow();
   });
-
-  test("devería devolver 900 cuando pasa de un total de 90%", () => {
-    const room1 = new Room("Special", [], 1000, 100);
-
-    const booking1 = new Booking(
-      "Booking1",
-      "example1@exaple",
-      new Date("04/16/2023"),
-      new Date("04/18/2023"),
-      30,
-      room1
-    );
-
-    room1.bookings.push(booking1);
-
-    expect(booking1.getFee()).toEqual(900);
-  });
+    
 });
