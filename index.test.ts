@@ -162,7 +162,7 @@ describe("Porcentaje de días con ocupación", () => {
     ).toBe(0);
   });
 
-  test("devería devolver 100% (100% de ocupación)", () => {
+  test("debería devolver 100% (100% de ocupación)", () => {
     const booking1 = new Booking(
       "Booking1",
       "example1@exaple",
@@ -195,7 +195,7 @@ describe("Porcentaje de días con ocupación", () => {
     ).toBe(100);
   });
 
-  test("devería devolver 50 (50% de ocupación)", () => {
+  test("debería devolver 50 (50% de ocupación)", () => {
     const booking1 = new Booking(
       "Booking1",
       "example1@exaple",
@@ -230,7 +230,7 @@ describe("Porcentaje de días con ocupación", () => {
 });
 
 describe("Array con habitaciones no ocupadas", () => {
-  test("devería ser igual a un array vacío (no hay habitaciones libres)", () => {
+  test("debería ser igual a un array vacío (no hay habitaciones libres)", () => {
     const booking1 = new Booking(
       "Booking1",
       "example1@exaple",
@@ -258,7 +258,7 @@ describe("Array con habitaciones no ocupadas", () => {
     ).toEqual([]);
   });
 
-  test("devería ser igual a room1", () => {
+  test("debería ser igual a room1", () => {
     const booking1 = new Booking(
       "Booking1",
       "example1@exaple",
@@ -286,7 +286,7 @@ describe("Array con habitaciones no ocupadas", () => {
     ).toEqual([room1]);
   });
 
-  test("devería ser igual a room2", () => {
+  test("debería ser igual a room2", () => {
     const booking1 = new Booking(
       "Booking1",
       "example1@exaple",
@@ -316,7 +316,7 @@ describe("Array con habitaciones no ocupadas", () => {
 });
 
 describe("Porcentaje de ocupación en todas las habitaciones", () => {
-  test("devería devolver 100", () => {
+  test("debería devolver 100", () => {
     const booking1 = new Booking(
       "Booking1",
       "example1@exaple",
@@ -348,7 +348,7 @@ describe("Porcentaje de ocupación en todas las habitaciones", () => {
     ).toEqual(100);
   });
 
-  test("devería devolver 80", () => {
+  test("debería devolver 80", () => {
     const booking1 = new Booking(
       "Booking1",
       "example1@exaple",
@@ -380,7 +380,7 @@ describe("Porcentaje de ocupación en todas las habitaciones", () => {
     ).toEqual(80);
   });
 
-  test("devería devolver 0", () => {
+  test("debería devolver 0", () => {
     const booking1 = new Booking(
       "Booking1",
       "example1@exaple",
@@ -412,7 +412,7 @@ describe("Porcentaje de ocupación en todas las habitaciones", () => {
     ).toEqual(0);
   });
 
-  test("devería devovler 50", () => {
+  test("debería devovler 50", () => {
     const booking1 = new Booking(
       "Booking1",
       "example1@exaple",
