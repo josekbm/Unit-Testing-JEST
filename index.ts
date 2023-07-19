@@ -130,7 +130,7 @@ class Booking {
 
   getFee(): number {
     let priceRoom = this.room.rate;
-    let durationInDays = (this.checkOut.getTime() - this.checkIn.getTime()) / (1000 * 60 * 60 * 24);
+    let durationInDays = (this.checkOut.getTime() - this.checkIn.getTime()) / (1000 * 3600 * 24);
     let discountRoom = priceRoom - (priceRoom * this.room.discount / 100);
     let fee = discountRoom * durationInDays;
     let discountBooking = fee - (fee * this.discount / 100); // Aplicar el descuento en la reserva
